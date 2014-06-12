@@ -19,24 +19,18 @@ class ArtistParser:
         artists = regx.findall(str(resultdict))
         return artists
     
-
-    def downloadPlaycount(self):
-        parameters = {'method' : 'user.gettopartists', 'user': self.name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}
-        result = requests.get(ArtistParser.API_URL,params=parameters)
-        resultdict = json.loads(result.content.decode("utf-8"))
-        regx = re.compile('\'playcount\': u\'(\d*)\',')
-        playcount = regx.findall(str(resultdict))
-        return playcount
-
 class Compare:
-    def checkCommon(artists_1, artists_2):
+    def __init__(self, artists_1, artists_2):
+        self.artists_1=artists_1
+        self.artists_2=artists_2
+    def checkCommon(self):
         commonArtists=[]
-        playcountIndex_1=[]
-        playcountIndex_2=[]
-        return artists_1
-        for x in range(0, 50):
-            for y in range (0, 50):
-                if artists_1[x] == artists_2[y]:
-                    commonArtists.append(artists_1[x])
-
-        return commonArtists
+        for x in range(0, 20):
+            for y in range (0, 20):
+                if self.artists_1[x] == self.artists_2[y]:
+                    commonArtists.append(self.artists_1[x])
+        if commonArtists==[]:
+            no_match=["No matches found, sorry"]
+            return no_match
+        else:
+            return commonArtists
