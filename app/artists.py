@@ -17,7 +17,7 @@ class ArtistParser:
         resultdict = json.loads(result.content.decode("utf-8"))
         regx = re.compile('\'name\': \'(\w*\s?\/?\w*-?\s?\w*\s?\w*)\'')
         artists = regx.findall(str(resultdict))
-        return resultdict.items()
+        return artists
 
     def downloadPlaycount(name):
         parameters = {'method' : 'user.gettopartists', 'user': name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}
@@ -34,8 +34,8 @@ class Compare:
         playcountIndex_2=[]
         return artists_1
         for x in range(0, 50):
-             for y in range (0, 50):
-                 if artists_1[x] == artists_2[y]:
-                      commonArtists.append(artists_1[x])
+            for y in range (0, 50):
+                if artists_1[x] == artists_2[y]:
+                    commonArtists.append(artists_1[x])
 
         return commonArtists
