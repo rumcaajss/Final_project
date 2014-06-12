@@ -11,19 +11,20 @@ class ArtistParser:
     def __init__(self, name):
         self.name = name
 
-    def downloadArtists(name):
-        parameters = {'method' : 'user.gettopartists', 'user': name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}
+    def downloadArtists(self):
+        parameters = {'method' : 'user.gettopartists', 'user': self.name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}
         result = requests.get(ArtistParser.API_URL,params=parameters)
         resultdict = json.loads(result.content.decode("utf-8"))
-        regx = re.compile('\'name\': \'(\w*\s?\/?\w*-?\s?\w*\s?\w*)\'')
+        regx = re.compile('\'name\': u\'(\w*\s?\/?\w*-?\s?\w*\s?\w*)\'')
         artists = regx.findall(str(resultdict))
         return artists
+    
 
-    def downloadPlaycount(name):
-        parameters = {'method' : 'user.gettopartists', 'user': name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}
+    def downloadPlaycount(self):
+        parameters = {'method' : 'user.gettopartists', 'user': self.name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}
         result = requests.get(ArtistParser.API_URL,params=parameters)
         resultdict = json.loads(result.content.decode("utf-8"))
-        regx = re.compile('\'playcount\': \'(\d*)\',')
+        regx = re.compile('\'playcount\': u\'(\d*)\',')
         playcount = regx.findall(str(resultdict))
         return playcount
 

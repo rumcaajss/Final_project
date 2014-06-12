@@ -25,6 +25,7 @@ class IndexView(View):
                 User 2: <input type="text" name="name2"><br>
                 <input type="submit" value="Submit">
             </form>
+            
             {% for artist in artists1 %}
                 <h2>
                     {{ artist }}
@@ -32,6 +33,10 @@ class IndexView(View):
             {% endfor %}
         </div>
         <div style="float:right; width:50%;">
+            <br>
+            <br>
+            <br>
+            <br>
             {% for artist in artists2 %}
                 <h2>
                     {{ artist }}
@@ -44,14 +49,12 @@ class IndexView(View):
 </html>
 """)
         user1=ArtistParser(name1)
-        artists_list_1 = user1.downloadArtists
-        test_lista=[43, 42]
-        test_lista2=[2,34]
-        #artists_list_2 = ArtistParser.downloadArtists(name2)
-        context1=Context({"artists1": test_lista, "artists2": test_lista2})
-        #conext2=Context({"artists2": artists_list_2})
+        artists_list_1 = user1.downloadArtists()
+        user2=ArtistParser(name2)
+        artists_list_2 = user2.downloadArtists()
+        context1=Context({"artists1": artists_list_1, "artists2": artists_list_2})
         return HttpResponse(template.render(context1))
-        
+        #return HttpResponse(artists_list_1)
 
    #<link rel="stylesheet" href="stylesheet.css"/>
         
