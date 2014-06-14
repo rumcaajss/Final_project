@@ -13,41 +13,41 @@ class IndexView(View):
         template=Template("""
 <html>
     <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'app/stylesheet.css' %}"/>
         <title>Comparision of top artists of two given users.</title>
     </head>
     <body>
-        <div style="width:100%;height: 100%;background-color:#FFA500;">
-            <div id="header" style="width:100%;background-color:#FFA500; text-align:center;">
-                <h4>Write names of LastFm users whose top artists you want to compare</h4><br>
-                <form>
-                    User 1: <input type="text" name="name1"><br>
-                    User 2: <input type="text" name="name2"><br>
-                    <input type="submit" value="Submit">
-                </form>
+        <div id="header">
+            <h3>Write names of LastFm users whose top artists you want to compare</h3>
+            <form>
+                User 1: <input type="text" name="name1"><br>
+                User 2: <input type="text" name="name2"><br>
+                <input type="submit" value="Submit">
+            </form>
                 
-                <h3>Common artists of {{ user1 }} and {{ user2 }} taken from Top20</h3>
-                {% for artist in common_artists %}
-                    <p>
-                        {{ artist }}
-                    </p>
-                {% endfor %}
-            </div>
-            <div style="background-color:#FFD700;float:left; width:50%;">
-                <h4>Artists of {{ user1 }}</h4>
-                {% for artist in artists1 %}
-                    <p>
-                        {{ artist }}
-                    </p>
-                {% endfor %}
-            </div>
-            <div style="background-color:#EEEEEE;float:right; width:50%;">
-                <h4>Artists of {{ user2 }}</h4>
-                {% for artist in artists2 %}
-                    <p>
-                        {{ artist }}
-                    </p>
-                {% endfor %}
-            </div>
+            <h4>Common artists of {{ user1 }} and {{ user2 }} taken from Top20</h4>
+            {% for artist in common_artists %}
+                <p id="common">
+                    {{ artist }}
+                </p>
+            {% endfor %}
+        </div>
+        <div id="left_column">
+            <h4>Artists of {{ user1 }}</h4>
+            {% for artist in artists1 %}
+                <p>
+                    {{ artist }}
+                </p>
+            {% endfor %}
+        </div>
+        <div id="right_column">
+            <h4>Artists of {{ user2 }}</h4>
+            {% for artist in artists2 %}
+                <p>
+                    {{ artist }}
+                </p>
+            {% endfor %}
         </div>
     </body>
 </html>
